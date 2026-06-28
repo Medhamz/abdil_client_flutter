@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+                android:id="@+id/nav_home"
+                android:title="🏠 Accueil" />
+        <item
+                android:id="@+id/nav_history"
+                android:title="📜 Historique" />
+        <item
+                android:id="@+id/nav_map"
+                android:title="🗺️ Carte" />
+        <item
+                android:id="@+id/nav_chat"
+                android:title="💬 Messages" />
+        <item
+                android:id="@+id/nav_disputes"
+                android:title="⚖️ Litiges" />
+        <item
+                android:id="@+id/nav_taxi_pub"
+                android:title="📢 Taxi Pub" />
+        <item
+                android:id="@+id/nav_support"
+                android:title="🛟 Support technique" />
+    </group>
+
+    <item android:title="📱 Autres">
+        <menu>
+            <item
+                    android:id="@+id/nav_help"
+                    android:title="❓ Aide" />
+            <item
+                    android:id="@+id/nav_settings"
+                    android:title="⚙️ Paramètres" />
+            <item
+                    android:id="@+id/nav_logout"
+                    android:title="🚪 Déconnexion" />
+        </menu>
+    </item>
+
+</menu>
