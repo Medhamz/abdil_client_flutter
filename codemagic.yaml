@@ -1,0 +1,19 @@
+workflows:
+  ios-build:
+    name: iOS Build
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+      xcode: latest
+    scripts:
+      - name: Install Flutter dependencies
+        script: |
+          flutter pub get
+      - name: Generate iOS files
+        script: |
+          flutter create --platforms=ios .
+      - name: Build iOS
+        script: |
+          flutter build ios --debug --no-codesign
+    artifacts:
+      - build/ios/iphoneos/*.ipa
