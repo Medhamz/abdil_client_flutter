@@ -6,12 +6,13 @@ workflows:
       flutter: stable
       xcode: latest
     scripts:
+      - name: Clean and regenerate iOS
+        script: |
+          rm -rf ios
+          flutter create --platforms=ios .
       - name: Install Flutter dependencies
         script: |
           flutter pub get
-      - name: Generate iOS files
-        script: |
-          flutter create --platforms=ios .
       - name: Build iOS
         script: |
           flutter build ios --debug --no-codesign
