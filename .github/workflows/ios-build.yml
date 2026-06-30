@@ -9,14 +9,22 @@ jobs:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
+      
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.44.4'
-      - name: Install dependencies
+      
+      - name: Install Flutter dependencies
         run: |
           flutter pub get
+          flutter clean
+      
+      - name: Generate iOS files
+        run: |
+          flutter create --platforms=ios .
           cd ios
           pod install
+      
       - name: Build iOS
         run: |
           flutter build ios --release --no-codesign
@@ -24,7 +32,9 @@ jobs:
           mkdir -p Payload
           cp -R Runner.app Payload/
           zip -r Runner.ipa Payload/
-      - uses: actions/upload-artifact@v4
+      
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
         with:
           name: ios-ipa
           path: build/ios/iphoneos/Runner.ipa
