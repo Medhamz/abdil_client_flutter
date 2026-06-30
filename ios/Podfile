@@ -1,32 +1,32 @@
-﻿platform :ios, '13.0'
+﻿platform :ios, "13.0"
 
-ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+ENV["COCOAPODS_DISABLE_STATS"] = "true"
 
-project 'Runner', {
-  'Debug' => :debug,
-  'Profile' => :release,
-  'Release' => :release,
+project "Runner", {
+  "Debug" => :debug,
+  "Profile" => :release,
+  "Release" => :release,
 }
 
 def flutter_root
-  generated_xcode_build_settings_path = File.expand_path(File.join('..', 'Flutter', 'Generated.xcconfig'), __FILE__)
+  generated_xcode_build_settings_path = File.expand_path(File.join("..", "Flutter", "Generated.xcconfig"), __FILE__)
   unless File.exist?(generated_xcode_build_settings_path)
-    raise "#{generated_xcode_build_settings_path} must exist. If you're running pod install manually, make sure flutter pub get is executed first"
+    raise "Generated.xcconfig must exist. If you are running pod install manually, make sure flutter pub get is executed first"
   end
 
   File.foreach(generated_xcode_build_settings_path) do |line|
     if line.match(/FLUTTER_ROOT\s*=\s*(.*)/)
-      return \.strip
+      return $1.strip
     end
   end
-  raise "FLUTTER_ROOT not found in #{generated_xcode_build_settings_path}. Try deleting Generated.xcconfig, then run flutter pub get"
+  raise "FLUTTER_ROOT not found"
 end
 
-require File.expand_path(File.join('packages', 'flutter_tools', 'bin', 'podhelper'), flutter_root)
+require File.expand_path(File.join("packages", "flutter_tools", "bin", "podhelper"), flutter_root)
 
 flutter_ios_podfile_setup
 
-target 'Runner' do
+target "Runner" do
   use_frameworks!
   use_modular_headers!
 
@@ -36,7 +36,7 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['ENABLE_BITCODE'] = 'NO'
+      config.build_settings["ENABLE_BITCODE"] = "NO"
     end
   end
 end
